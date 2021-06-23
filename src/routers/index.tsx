@@ -10,7 +10,7 @@ const routes = () => (
       <Route exact path="/">
         <Page />
       </Route>
-      <Route exact path="/page">
+      <Route path="/page">
         <Page />
       </Route>
       <Route path="/multi-point">
