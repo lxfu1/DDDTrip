@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { getWebGLContext, initShaders } from "@/cuon-utils";
+import { getWebGLContext, initShaders } from "@/util";
+import { initVertexBuffers } from "../util";
 import vshader from "./vshader.glsl";
 import fshader from "./fshader.glsl";
-import { initVertexBuffers } from "../util";
 
 export const MultiPoint = () => {
   const container: React.LegacyRef<HTMLCanvasElement> = useRef(null);

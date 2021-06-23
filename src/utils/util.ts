@@ -1,5 +1,5 @@
-import { getWebGLUtils } from "./webgl-utils";
-import { getWebGLDebugUtils } from "./webgl-debug";
+import { getWebGLUtils } from "./glUtils";
+import { getWebGLDebugUtils } from "./debug";
 import { GLContext } from "./interface";
 /**
  * Create a program object and make current

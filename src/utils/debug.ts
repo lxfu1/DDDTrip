@@ -1,12 +1,7 @@
-//Copyright (c) 2009 The Chromium Authors. All rights reserved.
-//Use of this source code is governed by a BSD-style license that can be
-//found in the LICENSE file.
-
 // letious functions for helping debug WebGL apps.
 
 // @ts-nocheck
-export const getWebGLDebugUtils = ()=>  {
-
+export const getWebGLDebugUtils = () => {
   /**
    * Which arguements are enums.
    * @type {!Object.<number, string>}
@@ -108,7 +103,7 @@ export const getWebGLDebugUtils = ()=>  {
         }
       }
     }
-  }
+  };
 
   /**
    * Checks the utils have been initialized.
@@ -117,7 +112,7 @@ export const getWebGLDebugUtils = ()=>  {
     if (glEnums == null) {
       throw "WebGLDebugUtils.init(ctx) not called";
     }
-  }
+  };
 
   /**
    * Returns true or false if value matches any WebGL enum
@@ -127,7 +122,7 @@ export const getWebGLDebugUtils = ()=>  {
   const mightBeEnum = (value: string) => {
     checkInit();
     return glEnums[value] !== undefined;
-  }
+  };
 
   /**
    * Gets an string version of an WebGL enum.
@@ -138,13 +133,13 @@ export const getWebGLDebugUtils = ()=>  {
    * @param {number} value Value to return an enum for
    * @return {string} The string version of the enum.
    */
-   const glEnumToString = (value: any) => {
+  const glEnumToString = (value: any) => {
     checkInit();
     let name = glEnums[value];
     return name !== undefined
       ? name
       : "*UNKNOWN WebGL ENUM (0x" + value.toString(16) + ")";
-  }
+  };
 
   /**
    * Returns the string version of a WebGL argument.
@@ -154,7 +149,11 @@ export const getWebGLDebugUtils = ()=>  {
    * @param {*} value The value of the argument.
    * @return {string} The value as a string.
    */
-   const  glFunctionArgToString = (functionName: string, argumentIndex: number, value: any) => {
+  const glFunctionArgToString = (
+    functionName: string,
+    argumentIndex: number,
+    value: any
+  ) => {
     const funcInfo = glValidEnumContexts[functionName];
     if (funcInfo !== undefined) {
       if (funcInfo[argumentIndex]) {
@@ -162,7 +161,7 @@ export const getWebGLDebugUtils = ()=>  {
       }
     }
     return value.toString();
-  }
+  };
 
   /**
    * Given a WebGL context returns a wrapped context that calls
@@ -205,7 +204,7 @@ export const getWebGLDebugUtils = ()=>  {
     let glErrorShadow = {};
 
     // Makes a function that calls a WebGL function and then calls getError.
-    const  makeErrorWrapper = (ctx, functionName) => {
+    const makeErrorWrapper = (ctx, functionName) => {
       return function () {
         let result = ctx[functionName].apply(ctx, arguments);
         let err = ctx.getError();
@@ -215,7 +214,7 @@ export const getWebGLDebugUtils = ()=>  {
         }
         return result;
       };
-    }
+    };
 
     // Make a an object that has a copy of every property of the WebGL context
     // but wraps all functions.
@@ -240,7 +239,7 @@ export const getWebGLDebugUtils = ()=>  {
     };
 
     return wrapper;
-  }
+  };
 
   function resetToInitialState(ctx) {
     let numAttribs = ctx.getParameter(ctx.MAX_VERTEX_ATTRIBS);
@@ -311,7 +310,7 @@ export const getWebGLDebugUtils = ()=>  {
     while (ctx.getError());
   }
 
-  const  makeLostContextSimulatingContext = (ctx) => {
+  const makeLostContextSimulatingContext = (ctx) => {
     let wrapper_ = {};
     let contextId_ = 1;
     let contextLost_ = false;
@@ -344,7 +343,7 @@ export const getWebGLDebugUtils = ()=>  {
         }
       }
       return true;
-    }
+    };
 
     function clearErrors() {
       let k = Object.keys(glErrorShadow_);
@@ -581,7 +580,7 @@ export const getWebGLDebugUtils = ()=>  {
     };
 
     return wrapper_;
-  }
+  };
 
   return {
     /**
