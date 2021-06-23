@@ -1,6 +1,6 @@
-import { getWebGLUtils } from './webgl-utils'
-import { getWebGLDebugUtils } from './webgl-debug'
-import { GLContext  } from "./interface";
+import { getWebGLUtils } from "./webgl-utils";
+import { getWebGLDebugUtils } from "./webgl-debug";
+import { GLContext } from "./interface";
 /**
  * Create a program object and make current
  * @param gl GL context
@@ -8,7 +8,11 @@ import { GLContext  } from "./interface";
  * @param fshader a fragment shader program (string)
  * @return true, if the program object was created and successfully made current
  */
-export const initShaders = (gl: GLContext, vshader: string, fshader: string) => {
+export const initShaders = (
+  gl: GLContext,
+  vshader: string,
+  fshader: string
+) => {
   var program = createProgram(gl, vshader, fshader);
   if (!program) {
     console.log("Failed to create program");
@@ -19,7 +23,7 @@ export const initShaders = (gl: GLContext, vshader: string, fshader: string) => 
   gl.program = program;
 
   return true;
-}
+};
 
 /**
  * Create a shader object
@@ -29,7 +33,6 @@ export const initShaders = (gl: GLContext, vshader: string, fshader: string) => 
  * @return created shader object, or null if the creation has failed.
  */
 export const loadShader = (gl: GLContext, type: number, source: string) => {
-   debugger
   // Create shader object
   var shader = gl.createShader(type);
   if (shader == null) {
@@ -53,7 +56,7 @@ export const loadShader = (gl: GLContext, type: number, source: string) => {
   }
 
   return shader;
-}
+};
 
 /**
  * Create the linked program object
@@ -62,7 +65,11 @@ export const loadShader = (gl: GLContext, type: number, source: string) => {
  * @param fshader a fragment shader program (string)
  * @return created program object, or null if the creation has failed
  */
-export const createProgram = (gl: GLContext, vshader: string, fshader: string) => {
+export const createProgram = (
+  gl: GLContext,
+  vshader: string,
+  fshader: string
+) => {
   // Create shader object
   var vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
   var fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
@@ -94,9 +101,7 @@ export const createProgram = (gl: GLContext, vshader: string, fshader: string) =
     return null;
   }
   return program;
-}
-
-
+};
 
 /**
  * Initialize and get the rendering for WebGL
@@ -104,7 +109,10 @@ export const createProgram = (gl: GLContext, vshader: string, fshader: string) =
  * @param opt_debug flag to initialize the context for debugging
  * @return the rendering context for WebGL
  */
-export const getWebGLContext = (canvas: HTMLCanvasElement, opt_debug?: boolean) => {
+export const getWebGLContext = (
+  canvas: HTMLCanvasElement,
+  opt_debug?: boolean
+) => {
   const { setupWebGL } = getWebGLUtils();
   const { makeDebugContext } = getWebGLDebugUtils();
   // Get the rendering context for WebGL
@@ -112,9 +120,9 @@ export const getWebGLContext = (canvas: HTMLCanvasElement, opt_debug?: boolean) 
   if (!gl) return null;
 
   // if opt_debug is explicitly false, create the context for debugging
-  if ( opt_debug) {
+  if (opt_debug) {
     gl = makeDebugContext(gl);
   }
 
   return gl;
-}
+};
